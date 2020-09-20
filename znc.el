@@ -3,6 +3,8 @@
 
 ;; Author: Yaroslav Shirokov
 ;; URL: https://github.com/sshirokov/ZNC.el
+;; Package-Version: 20160627.2032
+;; Package-Commit: ce468d185e4a949c45fdd7586313144bc69d4fe5
 ;; Version: 0.0.3
 ;; Package-Requires: ((cl-lib "0.2"))
 ;; Also available via Marmalade http://marmalade-repo.org/
@@ -115,7 +117,8 @@ some of the quirks that arise from using it with a naive ERC. "
           (with-current-buffer returning
             (znc-set-name wants-name)
             (rename-buffer wants-name))
-          (get-buffer wants-name))
+          (when-let ((buffer (get-buffer wants-name)))
+	    buffer))
       returning)))
 
 (defadvice erc-kill-channel (around znc-maybe-dont-part first nil activate)
@@ -238,4 +241,3 @@ to the matching values for the endpoint"
 (provide 'znc)  ;;;
 ;;;;;;;;;;;;;;;;;;;
 ;;; znc.el ends here
-
